@@ -146,10 +146,10 @@ body {
 }
 
 .nota {
-    color: #fff;
-    opacity: 0; 
-    animation: nota 20s linear infinite;
-    transform: translateZ(-2000px);
+  color: #fff;
+  opacity: 0; 
+  animation: nota 20s linear infinite;
+  transform: translateZ(-2000px);
 }
 
 .nota-1 {
@@ -159,21 +159,21 @@ body {
 }
 
 .nota-2 {
-    margin-top: -500px;
-    margin-left: 800px;
+    margin-top: 100px;
+    margin-left: 1000px;
     font-style: italic;
     width: 80px;
 }
 
 .nota-3 {
-    margin-top: 300px;
+    margin-top: -200px;
     margin-left: 600px;
 }
 
 .nota-4 {
   width: 300px;
   margin-top: 500px;
-  margin-left: 400px;
+  margin-left: 600px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;

@@ -153,27 +153,27 @@ body {
 }
 
 .nota-1 {
-    margin-top: 300px;
+    margin-top: 70px;
     font-style: italic;
     animation-delay: 10s;
 }
 
 .nota-2 {
-    margin-top: 100px;
-    margin-left: 1000px;
+    margin-top: 150px;
+    margin-left: 100px;
     font-style: italic;
     width: 80px;
 }
 
 .nota-3 {
-    margin-top: -200px;
-    margin-left: 600px;
+    margin-top: 200px;
+    margin-left: 200px;
 }
 
 .nota-4 {
   width: 300px;
-  margin-top: 500px;
-  margin-left: 600px;
+  margin-top: 200px;
+  margin-left: -30px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 10px 20px;
@@ -187,7 +187,7 @@ body {
 /* --- ESTILOS DEL VISOR DE FOTOS --- */
 #visorFoto {
   position: fixed;
-  top: 0; left: 0;
+  top: 0; left: -70px;
   width: 100vw; height: 100vh;
   background-color: rgba(0, 0, 0, 0.95); /* Fondo casi negro */
   z-index: 1000; /* Asegura que esté por encima de todo */
@@ -209,7 +209,7 @@ body {
 }
 
 #imagenPlaneta {
-  max-width: 80%;
+  max-width: 60%;
   max-height: 70vh;
   border-radius: 10px;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);

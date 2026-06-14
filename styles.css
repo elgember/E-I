@@ -154,26 +154,33 @@ body {
 
 .nota-1 {
     margin-top: 300px;
-    margin-left: 50px;
     font-style: italic;
     animation-delay: 10s;
 }
 
 .nota-2 {
-    margin-top: 200px;
-    margin-left: 900px;
+    margin-top: -500px;
+    margin-left: 800px;
     font-style: italic;
     width: 80px;
 }
 
 .nota-3 {
-    margin-top: -500px;
+    margin-top: 300px;
     margin-left: 600px;
 }
 
 .nota-4 {
-    margin-top: 700px;
-    margin-left: 600px;
+  width: 300px;
+  margin-top: 500px;
+  margin-left: 400px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: latido 2s infinite;
+  text-align: center;
 }
 
 
@@ -268,4 +275,10 @@ body.pausado .planeta {
     100% {
         transform: translateZ(50px);
     }
+}
+
+@keyframes latido {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+  100% { transform: scale(1); }
 }

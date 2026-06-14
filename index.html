@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen 3D Interactiva</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+   <!-- El Universo dicta la perspectiva -->
+<div class="universo">
+  <!-- La cámara es la que giraremos con el ratón -->
+  <div class="camara" id="miCamara">
+    
+    <!-- Los 8 planetas -->
+    <div class="planeta mercurio"></div>
+    <div class="planeta venus"></div>
+    <div class="planeta tierra"></div>
+    <div class="planeta marte"></div>
+    <div class="planeta jupiter"></div>
+    <div class="nota">
+        <div class="nota-1">mi amor</div>
+        <div class="nota-2">mi princesa</div>
+        <div class="nota-3">18/04/23</div>
+        <div class="nota-4">mi chiquita has click en planetas</div>
+    </div>
+    <div class="planeta saturno"></div>
+    <div class="planeta urano"></div>
+    <div class="planeta neptuno"></div>
+  </div>
+</div>
+<div id="visorFoto" class="visor-oculto">
+  <h2 id="nombrePlaneta">PLANETA</h2>
+  <img id="imagenPlaneta" src="" alt="Foto del planeta">
+  <div class="barra-progreso"></div>
+</div>
+    <script src="codigo.js"></script>
+</body>
+</html>

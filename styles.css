@@ -1,0 +1,271 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #020205;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 100px 100px;
+  overflow: hidden;
+  cursor: grab; /* Cambia el cursor para indicar que se puede arrastrar */
+}
+
+.universo {
+  width: 100vw;
+  height: 100vh;
+  perspective: 1200px; /* La perspectiva va en el contenedor más lejano */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camara {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* Permitimos que la cámara pase el entorno 3D a sus hijos (los planetas) */
+  transform-style: preserve-3d; 
+  /* Posición inicial de la cámara */
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+/* --- ESTILOS DE LOS PLANETAS (Mismos de antes) --- */
+.planeta {
+  position: absolute; top: 50%; left: 50%;
+  border-radius: 50%;
+  animation: acercamientoMasivo 20s linear infinite;
+  transform: translateZ(-4000px);
+  opacity: 0;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Al pasar el ratón, le damos un ligero brillo extra para indicar que es clickeable */
+.planeta:hover {
+  filter: brightness(1.5);
+  animation-play-state: paused;
+  
+  /* Lo iluminamos mucho más para que sepas que lo tienes en la mira */
+  filter: brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+}
+
+.planeta::before {
+  content: '';
+  position: absolute;
+  
+  /* Hacemos que el área donde puedes hacer clic sea mucho más grande 
+     que el planeta físico (150% más grande hacia cada lado) */
+ 
+  
+  /* IMPORTANTE: Si quieres ver esta área invisible para probar qué tan grande es, 
+     descomenta la siguiente línea quitando las barras (/* y */) */
+  /* background-color: rgba(255, 0, 0, 0.3); */
+}
+
+
+.mercurio { 
+    width: 40px;
+    height: 40px;
+    margin-top: -150px; 
+    margin-left: -300px; 
+    background: radial-gradient(circle at 30% 30%, #888, #222); 
+    animation-delay: 0s; 
+}
+
+.venus { 
+    width: 80px; 
+    height: 80px; 
+    margin-top: 200px; 
+    margin-left: 250px; 
+    background: radial-gradient(circle at 30% 30%, #e08e36, #5c3007); 
+    animation-delay: 2s; 
+}
+
+.tierra { 
+    width: 90px; 
+    height: 90px; 
+    margin-top: -50px; 
+    margin-left: 100px; 
+    background: radial-gradient(circle at 30% 30%, #4a90e2, #001f3f); 
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.4); 
+    animation-delay: 4.5s; 
+}
+
+.marte { 
+    width: 60px; 
+    height: 60px; 
+    margin-top: 150px; 
+    margin-left: -200px; 
+    background: radial-gradient(circle at 30% 30%, #c1440e, #4a1500); 
+    animation-delay: 7s; 
+}
+
+.jupiter { 
+    width: 350px; 
+    height: 350px; 
+    margin-top: -400px; 
+    margin-left: -500px; 
+    background: repeating-linear-gradient(0deg, #d39c7e 0%, #d39c7e 10%, #b27b5e 10%, #b27b5e 20%, #8c5738 20%, #8c5738 30%); 
+    animation-delay: 9s; 
+    box-shadow: inset -80px -80px 100px rgba(0,0,0,0.9);
+}
+
+.saturno { 
+    width: 280px; 
+    height: 280px; 
+    margin-top: 350px; 
+    margin-left: 500px; 
+    background: radial-gradient(circle at 30% 30%, #eaddb9, #6b5c38); 
+    animation-delay: 12.5s; 
+    box-shadow: inset -60px -60px 80px rgba(0,0,0,0.9);
+}
+
+.saturno::after { 
+    content: ''; 
+    position: absolute; top: 50%; left: 50%; 
+    width: 150%; height: 40%; 
+    border: 20px solid rgba(234, 221, 185, 0.6); 
+    border-radius: 50%; transform: translate(-50%, -50%) rotateZ(-20deg); 
+    box-sizing: border-box; 
+}
+
+.urano { 
+    width: 150px; 
+    height: 150px; 
+    margin-top: -250px; 
+    margin-left: 400px; 
+    background: radial-gradient(circle at 30% 30%, #d1e7e7, #3b6262); 
+    animation-delay: 15.5s; 
+}
+
+.neptuno { 
+    width: 140px; 
+    height: 140px; 
+    margin-top: 50px; 
+    margin-left: -450px; 
+    background: radial-gradient(circle at 30% 30%, #274687, #060e24); 
+    animation-delay: 18s; 
+}
+
+.nota {
+    color: #fff;
+    opacity: 0; 
+    animation: nota 20s linear infinite;
+    transform: translateZ(-2000px);
+}
+
+.nota-1 {
+    margin-top: 300px;
+    margin-left: 50px;
+    font-style: italic;
+    animation-delay: 10s;
+}
+
+.nota-2 {
+    margin-top: 200px;
+    margin-left: 900px;
+    font-style: italic;
+    width: 80px;
+}
+
+.nota-3 {
+    margin-top: -500px;
+    margin-left: 600px;
+}
+
+.nota-4 {
+    margin-top: 700px;
+    margin-left: 600px;
+}
+
+
+/* --- ESTILOS DEL VISOR DE FOTOS --- */
+#visorFoto {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95); /* Fondo casi negro */
+  z-index: 1000; /* Asegura que esté por encima de todo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none; /* No intercepta clics cuando está oculto */
+  transition: opacity 0.5s ease;
+  color: white;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+}
+
+#visorFoto.activo {
+  opacity: 1;
+  pointer-events: auto; /* Vuelve a interceptar clics */
+}
+
+#imagenPlaneta {
+  max-width: 80%;
+  max-height: 70vh;
+  border-radius: 10px;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+  object-fit: contain;
+}
+
+/* Barra de tiempo de 20 segundos */
+.barra-progreso {
+  width: 80%;
+  height: 4px;
+  background: #333;
+  margin-top: 30px;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.barra-progreso::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  transform-origin: left; /* Se encoge desde la derecha hacia la izquierda */
+}
+
+/* La animación dura 20 segundos exactamente */
+#visorFoto.activo .barra-progreso::after {
+  animation: cuentaRegresiva 20s linear forwards;
+}
+
+@keyframes cuentaRegresiva {
+  0% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+/* --- EL TRUCO DE LA PAUSA --- */
+/* Cuando el body tenga la clase 'pausado', todos los planetas congelan su animación */
+body.pausado .planeta {
+  animation-play-state: paused;
+}
+
+/* --- LA ANIMACIÓN (Misma de antes) --- */
+@keyframes acercamientoMasivo {
+  0% { transform: translateZ(-4000px); opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateZ(1300px); opacity: 0; }
+}
+
+@keyframes nota {
+    0% {
+        transform: translateZ(-500px);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(50px);
+    }
+}

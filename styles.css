@@ -163,7 +163,7 @@ body {
     margin-top: 250px;
     margin-left: 50px;
     font-style: italic;
-    width: 90px;
+    width: 120px;
 }
 
 .nota-3 {
@@ -173,7 +173,7 @@ body {
 
 .nota-4 {
   width: 300px;
-  margin-top: 50px;
+  margin-top: 300px;
   margin-left: 20px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);

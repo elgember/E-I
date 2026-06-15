@@ -350,3 +350,18 @@ body.pausado .planeta {
     box-shadow: 0 0 40px 10px rgba(100, 200, 255, 0);
   }
 }
+
+
+/* --- CAJAS TÁCTILES PLANAS (2D NORMAL) --- */
+.hitbox-planeta {
+  position: fixed !important; /* Totalmente fuera del 3D, pegado al cristal del celular */
+  z-index: 9999 !important; /* Por encima de todo el universo */
+  border-radius: 50%;
+  pointer-events: auto !important; /* Obliga a recibir el toque del dedo */
+  
+  /* El truco para centrarlo perfecto sin que se deslice: */
+  transform: translate(-50%, -50%); 
+  
+  /* 🟢 COLOR VERDE PARA PRUEBAS (Bórralo cuando veas que funciona) */
+  background-color: rgba(0, 255, 0, 0.4); 
+}

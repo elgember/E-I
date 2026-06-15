@@ -180,6 +180,82 @@ function crearDestello(e) {
   }, 600);
 }
 
-// Le decimos al navegador que esté atento tanto a los ratones como a los dedos
-document.addEventListener('mousedown', crearDestello);
-document.addEventListener('touchstart', crearDestello);
+
+// --- SISTEMA DE RASTREO 2D PLANO ---
+
+// Esperamos a que la página cargue para evitar errores
+document.addEventListener('DOMContentLoaded', () => {
+  const planetas3D = document.querySelectorAll('.planeta');
+  const cajas2D = [];
+
+  planetas3D.forEach(planeta => {
+    // 1. Creamos la caja plana (2D)
+    const hitbox = document.createElement('div');
+    hitbox.className = 'hitbox-planeta';
+    
+    // 2. La inyectamos directamente en el body (Fuera del contenedor 3D)
+    document.body.appendChild(hitbox);
+
+    // 3. Evento de toque directo
+    hitbox.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evita clics dobles
+
+      // Obtenemos el nombre del planeta de forma segura
+      let nombre = "";
+      planeta.classList.forEach(clase => {
+        if(clase !== 'planeta') nombre = clase;
+      });
+
+      // Conectamos con el visor
+      const tituloPlaneta = document.getElementById('nombrePlaneta');
+      const imgPlaneta = document.getElementById('imagenPlaneta');
+      const visor = document.getElementById('visorFoto');
+
+      tituloPlaneta.innerText = nombresPersonalizados[nombre];
+      imgPlaneta.src = fotosReales[nombre];
+
+      visor.classList.add('activo');
+      document.body.classList.add('pausado');
+
+      clearTimeout(temporizadorVisor);
+      temporizadorVisor = setTimeout(() => {
+        cerrarVisor();
+      }, 20000);
+    });
+
+    cajas2D.push({ planeta3D: planeta, hitbox2D: hitbox });
+  });
+
+  // 4. El motor que pega las coordenadas 3D a la pantalla 2D
+  function rastrearCajas() {
+    cajas2D.forEach(item => {
+      // getBoundingClientRect lee dónde se dibujó el planeta en la pantalla de tu celular
+      const rect = item.planeta3D.getBoundingClientRect();
+
+      // Si el planeta tiene un tamaño lógico y está en la pantalla...
+      if (rect.width > 0 && rect.top < window.innerHeight && rect.bottom > 0) {
+        item.hitbox2D.style.display = 'block';
+
+        // Calculamos el centro exacto
+        const centroX = rect.left + (rect.width / 2);
+        const centroY = rect.top + (rect.height / 2);
+
+        // El tamaño: Mínimo 80px (perfecto para un dedo pulgar), si el planeta es más grande, crece con él.
+        const tamano = Math.max(rect.width, 80);
+
+        // Actualizamos la posición 2D
+        item.hitbox2D.style.left = `${centroX}px`;
+        item.hitbox2D.style.top = `${centroY}px`;
+        item.hitbox2D.style.width = `${tamano}px`;
+        item.hitbox2D.style.height = `${tamano}px`;
+      } else {
+        // Si el planeta está detrás de la cámara, ocultamos el círculo
+        item.hitbox2D.style.display = 'none';
+      }
+    });
+
+    requestAnimationFrame(rastrearCajas);
+  }
+
+  rastrearCajas();
+});

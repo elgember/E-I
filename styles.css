@@ -153,7 +153,7 @@ body {
 }
 
 .nota-1 {
-    margin-top: 70px;
+    margin-top: 40px;
     margin-left: 100px;
     font-style: italic;
     animation-delay: 10s;
@@ -173,7 +173,7 @@ body {
 
 .nota-4 {
   width: 300px;
-  margin-top: 180px;
+  margin-top: 50px;
   margin-left: 20px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);

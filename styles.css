@@ -1,11 +1,18 @@
 body {
-  margin: 0;
-  height: 100vh;
   background-color: #020205;
   background-image: radial-gradient(white 1px, transparent 1px);
   background-size: 100px 100px;
   overflow: hidden;
   cursor: grab; /* Cambia el cursor para indicar que se puede arrastrar */
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* Estas 3 líneas son la magia para que no se mueva a los lados: */
+  position: fixed;    /* Ancla la página web entera para que no rebote ni se deslice */
+  touch-action: none; /* Le prohíbe al celular hacer scroll nativo con el dedo */
+  
 }
 
 .universo {
@@ -15,6 +22,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 
 .camara {
@@ -46,20 +58,6 @@ body {
   /* Lo iluminamos mucho más para que sepas que lo tienes en la mira */
   filter: brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
 }
-
-.planeta::before {
-  content: '';
-  position: absolute;
-  
-  /* Hacemos que el área donde puedes hacer clic sea mucho más grande 
-     que el planeta físico (150% más grande hacia cada lado) */
- 
-  
-  /* IMPORTANTE: Si quieres ver esta área invisible para probar qué tan grande es, 
-     descomenta la siguiente línea quitando las barras (/* y */) */
-  /* background-color: rgba(255, 0, 0, 0.3); */
-}
-
 
 .mercurio { 
     width: 40px;
@@ -146,6 +144,8 @@ body {
 }
 
 .nota {
+  margin: 0;
+  padding: 0;
   color: #fff;
   opacity: 0; 
   animation: nota 20s linear infinite;
@@ -172,7 +172,7 @@ body {
 
 .nota-4 {
   width: 300px;
-  margin-top: 200px;
+  margin-top: 150px;
   margin-left: -30px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -183,12 +183,13 @@ body {
   text-align: center;
 }
 
-
 /* --- ESTILOS DEL VISOR DE FOTOS --- */
 #visorFoto {
   position: fixed;
-  top: 0; left: -70px;
-  width: 100vw; height: 100vh;
+  top: 0; 
+  left: 0px;
+  width: 100vw; 
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.95); /* Fondo casi negro */
   z-index: 1000; /* Asegura que esté por encima de todo */
   display: flex;
@@ -201,6 +202,8 @@ body {
   color: white;
   font-family: sans-serif;
   letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
 }
 
 #visorFoto.activo {
@@ -210,14 +213,19 @@ body {
 
 #imagenPlaneta {
   max-width: 60%;
-  max-height: 70vh;
+  max-height: 40vh;
   border-radius: 10px;
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
   object-fit: contain;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* Barra de tiempo de 20 segundos */
 .barra-progreso {
+  margin: 0;
+  padding: 0;
   width: 80%;
   height: 4px;
   background: #333;
@@ -281,4 +289,64 @@ body.pausado .planeta {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
   100% { transform: scale(1); }
+}
+
+/* --- ADAPTACIÓN PARA DISPOSITIVOS MÓVILES --- */
+@media (max-width: 768px) {
+  /* Hacemos la letra un poco más pequeña para que encaje bien */
+  .nota-1, .nota-2 {
+    font-size: 18px;
+  }
+  .nota-3 {
+    font-size: 14px;
+  }
+  .nota-4 {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  /* Ajustamos el título del visor de fotos para que no se desborde */
+  #nombrePlaneta {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  /* La imagen del planeta puede ocupar un poco más de ancho en móvil */
+  #imagenPlaneta {
+    max-width: 95%;
+  }
+}
+
+/* Esto asegura que el hover y la pausa SOLO funcionen en dispositivos con ratón físico */
+@media (hover: hover) {
+  .planeta:hover {
+    animation-play-state: paused;
+    filter: brightness(1.5) drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+  }
+}
+
+/* --- EFECTO DE TOQUE (POLVO ESTELAR) --- */
+.onda-estelar {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  /* Un degradado que parece una estrella brillando */
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(100,200,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none; /* MUY IMPORTANTE: Evita que la luz bloquee los clics en los botones */
+  z-index: 9999; /* Por encima de los planetas */
+  animation: destello 0.6s ease-out forwards;
+}
+
+@keyframes destello {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4); /* Se hace 4 veces más grande */
+    opacity: 0; /* Se vuelve invisible */
+    box-shadow: 0 0 40px 10px rgba(100, 200, 255, 0);
+  }
 }

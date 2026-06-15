@@ -166,13 +166,13 @@ body {
 }
 
 .nota-3 {
-    margin-top: 200px;
+    margin-top: 300px;
     margin-left: 200px;
 }
 
 .nota-4 {
   width: 300px;
-  margin-top: 150px;
+  margin-top: 300px;
   margin-left: -30px;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -204,6 +204,7 @@ body {
   letter-spacing: 2px;
   margin: 0;
   padding: 0;
+  z-index: 50;
 }
 
 #visorFoto.activo {
@@ -220,6 +221,7 @@ body {
   display: block;
   margin: 0;
   padding: 0;
+  z-index: 50;
 }
 
 /* Barra de tiempo de 20 segundos */
@@ -355,13 +357,11 @@ body.pausado .planeta {
 /* --- CAJAS TÁCTILES PLANAS (2D NORMAL) --- */
 .hitbox-planeta {
   position: fixed !important; /* Totalmente fuera del 3D, pegado al cristal del celular */
-  z-index: 9999 !important; /* Por encima de todo el universo */
+  z-index: 39 !important; /* Por encima de todo el universo */
   border-radius: 50%;
   pointer-events: auto !important; /* Obliga a recibir el toque del dedo */
   
   /* El truco para centrarlo perfecto sin que se deslice: */
   transform: translate(-50%, -50%); 
   
-  /* 🟢 COLOR VERDE PARA PRUEBAS (Bórralo cuando veas que funciona) */
-  background-color: rgba(0, 255, 0, 0.4); 
 }
